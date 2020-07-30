@@ -16,8 +16,6 @@
 package com.stratio.cassandra.lucene.search.sort;
 
 import com.google.common.base.MoreObjects;
-import com.spatial4j.core.distance.DistanceUtils;
-import com.spatial4j.core.shape.Point;
 import com.stratio.cassandra.lucene.IndexException;
 import com.stratio.cassandra.lucene.common.GeospatialUtils;
 import com.stratio.cassandra.lucene.schema.Schema;
@@ -26,6 +24,8 @@ import com.stratio.cassandra.lucene.schema.mapping.Mapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.queries.function.ValueSource;
 import org.apache.lucene.spatial.SpatialStrategy;
+import org.locationtech.spatial4j.distance.DistanceUtils;
+import org.locationtech.spatial4j.shape.Point;
 
 import java.util.Collections;
 import java.util.Set;

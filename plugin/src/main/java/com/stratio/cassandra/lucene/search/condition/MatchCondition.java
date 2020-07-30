@@ -23,6 +23,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
 import org.apache.lucene.util.BytesRefBuilder;
+import org.apache.lucene.util.LegacyNumericUtils;
 import org.apache.lucene.util.NumericUtils;
 import org.apache.lucene.util.QueryBuilder;
 
@@ -105,7 +106,7 @@ public class MatchCondition extends SingleColumnCondition {
             return new DocValuesNumbersQuery(field, docValue(value));
         } else {
             BytesRefBuilder ref = new BytesRefBuilder();
-            NumericUtils.intToPrefixCoded(value, 0, ref);
+            LegacyNumericUtils.intToPrefixCoded(value, 0, ref);
             return new TermQuery(new Term(field, ref.toBytesRef()));
         }
     }
@@ -115,7 +116,7 @@ public class MatchCondition extends SingleColumnCondition {
             return new DocValuesNumbersQuery(field, docValue(value));
         } else {
             BytesRefBuilder ref = new BytesRefBuilder();
-            NumericUtils.longToPrefixCoded(value, 0, ref);
+            LegacyNumericUtils.longToPrefixCoded(value, 0, ref);
             return new TermQuery(new Term(field, ref.toBytesRef()));
         }
     }
@@ -123,13 +124,13 @@ public class MatchCondition extends SingleColumnCondition {
     private Query query(Float value) {
         return docValues
                ? new DocValuesNumbersQuery(field, docValue(value))
-               : NumericRangeQuery.newFloatRange(field, value, value, true, true);
+               : LegacyNumericRangeQuery.newFloatRange(field, value, value, true, true);
     }
 
     private Query query(Double value) {
         return docValues
                ? new DocValuesNumbersQuery(field, docValue(value))
-               : NumericRangeQuery.newDoubleRange(field, value, value, true, true);
+               : LegacyNumericRangeQuery.newDoubleRange(field, value, value, true, true);
     }
 
     /** {@inheritDoc} */

@@ -23,6 +23,7 @@ import org.apache.lucene.document.Document
 import org.apache.lucene.index._
 import org.apache.lucene.search._
 import org.apache.lucene.store.{Directory, FSDirectory, NRTCachingDirectory}
+import org.apache.solr.index.SortingMergePolicy
 
 /** Class wrapping a Lucene file system-based directory and its readers, writers and searchers.
   *
@@ -79,9 +80,9 @@ class FSIndex(
         searcher
       }
     }
-    val tracker = new TrackingIndexWriter(writer)
-    manager = new SearcherManager(writer, true, searcherFactory)
-    reopener = new ControlledRealTimeReopenThread(tracker, manager, refreshSeconds, refreshSeconds)
+
+    manager = new SearcherManager(writer, searcherFactory)
+    reopener = new ControlledRealTimeReopenThread(writer, manager, refreshSeconds, refreshSeconds)
     reopener.start()
   }
 

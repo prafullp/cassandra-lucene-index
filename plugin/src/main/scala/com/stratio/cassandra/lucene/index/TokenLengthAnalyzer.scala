@@ -19,8 +19,7 @@ import com.google.common.base.MoreObjects
 import com.stratio.cassandra.lucene.util.Logging
 import org.apache.lucene.analysis.Analyzer.TokenStreamComponents
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
-import org.apache.lucene.analysis.util.FilteringTokenFilter
-import org.apache.lucene.analysis.{Analyzer, AnalyzerWrapper}
+import org.apache.lucene.analysis.{Analyzer, AnalyzerWrapper, FilteringTokenFilter}
 import org.apache.lucene.index.IndexWriter
 
 /** [[AnalyzerWrapper]] that discards too large tokens.
